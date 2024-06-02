@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import { Task } from "../../types/public-types";
 import { BarTask } from "../../types/bar-task";
 import styles from "./tooltip.module.css";
+import { getDateTimeWithFormat } from "../../utils/formatDate";
 
 export type TooltipProps = {
   task: BarTask;
@@ -125,21 +126,13 @@ export const StandardTooltipContent: React.FC<{
     <div className={styles.tooltipDefaultContainer} style={style}>
       <b style={{ fontSize: fontSize + 6 }}>{`${
         task.name
-      }: ${task.start.getDate()}-${
-        task.start.getMonth() + 1
-      }-${task.start.getFullYear()} - ${task.end.getDate()}-${
-        task.end.getMonth() + 1
-      }-${task.end.getFullYear()}`}</b>
+      }: ${getDateTimeWithFormat(task.start)} - ${getDateTimeWithFormat(task.end)}`}</b>
       {task.end.getTime() - task.start.getTime() !== 0 && (
-        <p className={styles.tooltipDefaultContainerParagraph}>{`Duration: ${~~(
+        <p className={styles.tooltipDefaultContainerParagraph}>{`Tham gia trong: ${~~(
           (task.end.getTime() - task.start.getTime()) /
           (1000 * 60 * 60 * 24)
-        )} day(s)`}</p>
+        )} ngày`}</p>
       )}
-
-      <p className={styles.tooltipDefaultContainerParagraph}>
-        {!!task.progress && `Progress: ${task.progress} %`}
-      </p>
     </div>
   );
 };

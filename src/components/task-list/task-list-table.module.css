@@ -19,9 +19,16 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-align: center;
 }
 .taskListNameWrapper {
   display: flex;
+}
+
+.taskListName{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .taskListExpander {

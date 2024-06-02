@@ -6,9 +6,6 @@ export const Project: React.FC<TaskItemProps> = ({ task, isSelected }) => {
   const barColor = isSelected
     ? task.styles.backgroundSelectedColor
     : task.styles.backgroundColor;
-  const processColor = isSelected
-    ? task.styles.progressSelectedColor
-    : task.styles.progressColor;
   const projectWith = task.x2 - task.x1;
 
   const projectLeftTriangle = [
@@ -39,15 +36,6 @@ export const Project: React.FC<TaskItemProps> = ({ task, isSelected }) => {
         rx={task.barCornerRadius}
         ry={task.barCornerRadius}
         className={styles.projectBackground}
-      />
-      <rect
-        x={task.progressX}
-        width={task.progressWidth}
-        y={task.y}
-        height={task.height}
-        ry={task.barCornerRadius}
-        rx={task.barCornerRadius}
-        fill={processColor}
       />
       <rect
         fill={barColor}

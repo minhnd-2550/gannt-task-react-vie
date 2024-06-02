@@ -1,25 +1,7 @@
-import React, { useMemo } from "react";
+import React from "react";
 import styles from "./task-list-table.module.css";
 import { Task } from "../../types/public-types";
-
-const localeDateStringCache = {};
-const toLocaleDateStringFactory =
-  (locale: string) =>
-  (date: Date, dateTimeOptions: Intl.DateTimeFormatOptions) => {
-    const key = date.toString();
-    let lds = localeDateStringCache[key];
-    if (!lds) {
-      lds = date.toLocaleDateString(locale, dateTimeOptions);
-      localeDateStringCache[key] = lds;
-    }
-    return lds;
-  };
-const dateTimeOptions: Intl.DateTimeFormatOptions = {
-  weekday: "short",
-  year: "numeric",
-  month: "long",
-  day: "numeric",
-};
+import { getDateTimeWithFormat } from "../../utils/formatDate";
 
 export const TaskListTableDefault: React.FC<{
   rowHeight: number;
@@ -37,13 +19,9 @@ export const TaskListTableDefault: React.FC<{
   tasks,
   fontFamily,
   fontSize,
-  locale,
   onExpanderClick,
 }) => {
-  const toLocaleDateString = useMemo(
-    () => toLocaleDateStringFactory(locale),
-    [locale]
-  );
+
 
   return (
     <div
@@ -86,7 +64,7 @@ export const TaskListTableDefault: React.FC<{
                 >
                   {expanderSymbol}
                 </div>
-                <div>{t.name}</div>
+                <div className={styles.taskListName}>{t.name}</div>
               </div>
             </div>
             <div
@@ -96,7 +74,7 @@ export const TaskListTableDefault: React.FC<{
                 maxWidth: rowWidth,
               }}
             >
-              &nbsp;{toLocaleDateString(t.start, dateTimeOptions)}
+              &nbsp;{getDateTimeWithFormat(t.start)}
             </div>
             <div
               className={styles.taskListCell}
@@ -105,7 +83,7 @@ export const TaskListTableDefault: React.FC<{
                 maxWidth: rowWidth,
               }}
             >
-              &nbsp;{toLocaleDateString(t.end, dateTimeOptions)}
+              &nbsp;{getDateTimeWithFormat(t.end)}
             </div>
           </div>
         );

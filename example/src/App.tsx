@@ -1,22 +1,12 @@
 import React from "react";
 import { Task, ViewMode, Gantt } from "gantt-task-react";
-import { ViewSwitcher } from "./components/view-switcher";
 import { getStartEndDateForProject, initTasks } from "./helper";
 import "gantt-task-react/dist/index.css";
 
 // Init
 const App = () => {
-  const [view, setView] = React.useState<ViewMode>(ViewMode.Day);
   const [tasks, setTasks] = React.useState<Task[]>(initTasks());
-  const [isChecked, setIsChecked] = React.useState(true);
-  let columnWidth = 65;
-  if (view === ViewMode.Year) {
-    columnWidth = 350;
-  } else if (view === ViewMode.Month) {
-    columnWidth = 300;
-  } else if (view === ViewMode.Week) {
-    columnWidth = 250;
-  }
+  let columnWidth = 80;
 
   const handleTaskChange = (task: Task) => {
     console.log("On date change Id:" + task.id);
@@ -69,15 +59,10 @@ const App = () => {
 
   return (
     <div className="Wrapper">
-      <ViewSwitcher
-        onViewModeChange={viewMode => setView(viewMode)}
-        onViewListChange={setIsChecked}
-        isChecked={isChecked}
-      />
       <h3>Gantt With Unlimited Height</h3>
       <Gantt
         tasks={tasks}
-        viewMode={view}
+        viewMode={ViewMode.Month}
         onDateChange={handleTaskChange}
         onDelete={handleTaskDelete}
         onProgressChange={handleProgressChange}
@@ -85,23 +70,9 @@ const App = () => {
         onClick={handleClick}
         onSelect={handleSelect}
         onExpanderClick={handleExpanderClick}
-        listCellWidth={isChecked ? "155px" : ""}
+        listCellWidth={"155px"}
         columnWidth={columnWidth}
-      />
-      <h3>Gantt With Limited Height</h3>
-      <Gantt
-        tasks={tasks}
-        viewMode={view}
-        onDateChange={handleTaskChange}
-        onDelete={handleTaskDelete}
-        onProgressChange={handleProgressChange}
-        onDoubleClick={handleDblClick}
-        onClick={handleClick}
-        onSelect={handleSelect}
-        onExpanderClick={handleExpanderClick}
-        listCellWidth={isChecked ? "155px" : ""}
-        ganttHeight={300}
-        columnWidth={columnWidth}
+        locale="vie"
       />
     </div>
   );
