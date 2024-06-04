@@ -42,7 +42,7 @@ export const TaskListHeaderDefault: React.FC<{
             minWidth: rowWidth,
           }}
         >
-          Tham gia từ
+          Ngày tham gia
         </div>
         <div
           className={styles.ganttTable_HeaderSeparator}

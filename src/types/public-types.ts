@@ -95,6 +95,7 @@ export interface StylingOption {
   handleWidth?: number;
   fontFamily?: string;
   fontSize?: string;
+  showTooltip?: boolean;
   /**
    * How many of row width can be taken by task.
    * From 0 to 100

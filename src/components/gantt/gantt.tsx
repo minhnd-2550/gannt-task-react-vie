@@ -58,6 +58,7 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
   TooltipContent = StandardTooltipContent,
   TaskListHeader = TaskListHeaderDefault,
   TaskListTable = TaskListTableDefault,
+  showTooltip = false,
   onDateChange,
   onProgressChange,
   onDoubleClick,
@@ -466,7 +467,7 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
           scrollY={scrollY}
           scrollX={scrollX}
         />
-        {ganttEvent.changedTask && (
+        {showTooltip && ganttEvent.changedTask && (
           <Tooltip
             arrowIndent={arrowIndent}
             rowHeight={rowHeight}
